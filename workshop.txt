@@ -1,0 +1,52 @@
+CREATE TABLE Stores (
+	SID int not NULL,
+    Name varchar(20),
+    City Varchar(20),
+  	PRIMARY KEY(SID)
+)
+
+CREATE TABLE Products (
+	PID int not NULL,
+  	Name varchar(50),
+    Price DECIMAL(10,2),
+  	PRIMARY KEY(PID)
+)
+
+CREATE TABLE Sales (
+	SID int not NULL,
+  	PID int not NULL,
+	SaleDate varchar(50),
+  	FOREIGN KEY(SID) REFERENCES Stores(SID),
+    FOREIGN KEY(PID) REFERENCES Products(PID)
+)
+
+INSERT INTO Stores
+VALUES (1, "A", "TLV"),(2, "B", "TLV"),(3, "C", "JLM"),(4, "D", "TLV")
+
+insert into Products
+values (1, "Laptop", 456.60), (2, "iPhone", 5456.60),(3, "Other", 12.12)
+
+insert into Sales
+values (1,1,"01/01/2022"), (2,2,"08/02/2022"), (1,1,"01/04/2022"), (1,2,"06/06/2022")
+
+create TABLE Fact (
+	sid int not NULL,
+  	pid int not NULL,
+  	price decimal(12,2),
+  	city varchar(50),
+    saleYear int,
+  	FOREIGN KEY(sid) REFERENCES dsStores(SID),
+  	FOREIGN KEY(pid) REFERENCES dsProducts(PID)
+)
+
+create table dsStores (
+	SID int not NULL,
+    City Varchar(20),
+  	PRIMARY KEY(SID)
+)
+
+create table dsProducts (
+	PID int not NULL,
+  	Price decimal(12,2),
+  	PRIMARY KEY(PID)
+)
